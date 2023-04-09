@@ -11,7 +11,7 @@ interface ThingToLearn {
 function App() {
   // A state value will store the current state of the array of data which can be updated
   // by editing your database in Notion and then pressing the fetch button again
-  const [thingsToLearn, setThingsToLearn] = useState<ThingToLearn[]>([]);
+  const [thingsToLearn, setThingsToLearn] = useState<any[]>([]);
 
   return (
     <div>
@@ -24,6 +24,7 @@ function App() {
             .then((payload) => {
               // Set the React state with the array response
               setThingsToLearn(payload);
+              console.log(payload);
             });
         }}
       >
@@ -37,7 +38,7 @@ function App() {
           return (
             <li key={idx}>
               <a href={thing.url} target="_blank" rel="noopener noreferrer">
-                {thing.label}
+                {thing?.properties['Measurable Goal']?.title[0]?.plain_text}
               </a>
             </li>
           );
